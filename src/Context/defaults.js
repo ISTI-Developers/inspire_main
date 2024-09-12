@@ -1,0 +1,22 @@
+export const defaults = {
+  inquiry: {
+    company_name: "",
+    company_information: "",
+    name: "",
+    designation: "",
+    email: "",
+    contact_number: "",
+    event_title: "",
+    event_description: "",
+    event_setup: "Face-to-face (Please specify the venue)",
+    event_location: "",
+    is_recorded: false,
+    is_streamed: false,
+    event_date: new Date(),
+    speaker_timeslot: "",
+    audience_size: "",
+    audience_profile: "",
+    training_objective: "",
+    documents: null,
+  },
+};

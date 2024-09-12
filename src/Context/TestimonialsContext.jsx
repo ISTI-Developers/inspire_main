@@ -11,19 +11,6 @@ export default function useTestimonials() {
 
 export function TestimonialsProvider({ children }) {
   //all functions here for a module
-  const insertTestimonial = async (data) => {
-    const formdata = new FormData();
-    formdata.append("recommendation", data.recommendation);
-    formdata.append("name", data.name);
-    formdata.append("company", data.company);
-    formdata.append("position", data.position);
-    try {
-      const response = await axios.post(endpoints.testimonials, formdata);
-      return response.data;
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   const retrieveTestimonials = async () => {
     try {
@@ -33,39 +20,9 @@ export function TestimonialsProvider({ children }) {
       console.log(e);
     }
   };
-  const updateTestimonial = async (data) => {
-    // const formdata = new FormData();
-    // formdata.append("id", data.payment_id);
-    // formdata.append("recommendation", data.recommendation);
-    // formdata.append("name", data.name);
-    // formdata.append("company", data.company);
-    // formdata.append("position", data.position);
-    try {
-      const response = await axios.put(endpoints.testimonials, {
-        ...data,
-        id: data.payment_id,
-      });
-      return response.data;
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  const deleteTestimonial = async (id) => {
-    try {
-      const response = await axios.delete(endpoints.testimonials, {
-        params: { id: id },
-      });
-      return response.data;
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   const values = {
     retrieveTestimonials,
-    insertTestimonial,
-    updateTestimonial,
-    deleteTestimonial,
     //all function names here
   };
 

@@ -10,23 +10,6 @@ export default function useBlogs() {
 
 export function BlogsProvider({ children }) {
   //all functions here for a module
-  const insertBlog = async (title, image, content) => {
-    const formdata = new FormData();
-    formdata.append(
-      "data",
-      JSON.stringify({
-        title: title,
-        content: content,
-      })
-    );
-    formdata.append("image", image);
-    try {
-      const response = await axios.post(endpoints.blogs, formdata);
-      return response.data;
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   const retrieveBlogs = async () => {
     try {
@@ -36,33 +19,9 @@ export function BlogsProvider({ children }) {
       console.log(e);
     }
   };
-  const updateBlog = async (id, title, content, path, image) => {
-    const formdata = new FormData();
-    const newdata = {
-      title: title,
-      content: content,
-      path: path,
-    };
-
-    formdata.append("id", id);
-    if (typeof image === "string") {
-      newdata.image = image;
-    } else {
-      formdata.append("image", image);
-    }
-    formdata.append("data", JSON.stringify(newdata));
+  const retrieveBlog = async (id) => {
     try {
-      const response = await axios.post(endpoints.blogs, formdata);
-      return response.data;
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  const deleteBlog = async (id) => {
-    try {
-      const response = await axios.delete(endpoints.blogs, {
-        params: { id: id },
-      });
+      const response = await axios.get(endpoints.blogs + `?id=${id}`);
       return response.data;
     } catch (e) {
       console.log(e);
@@ -71,9 +30,7 @@ export function BlogsProvider({ children }) {
 
   const values = {
     retrieveBlogs,
-    insertBlog,
-    updateBlog,
-    deleteBlog,
+    retrieveBlog,
     //all function names here
   };
 
