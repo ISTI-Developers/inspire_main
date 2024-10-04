@@ -7,6 +7,7 @@ import Banners from "../Components/Homepage/Banners/Banners";
 import Learning from "../Components/Homepage/Learning/Learning";
 import Clients from "../Components/Homepage/Clients/Clients";
 import OurPrograms from "../Components/Homepage/OurPrograms/OurPrograms";
+import UpcomingPrograms from "../Components/Homepage/UpcomingPrograms/UpcomingPrograms";
 import { SubscriptionProvider } from "../Context/SubscriptionContext";
 import { ClientProvider } from "../Context/ClientContext";
 import useSubscription from "../Context/SubscriptionContext";
@@ -26,6 +27,9 @@ export default function Home() {
       <PartnerProvider>
         <Learning />
       </PartnerProvider>
+      <ProgramProvider>
+        <UpcomingPrograms />
+      </ProgramProvider>
       <TestimonialsProvider>
         <Testimonial />
       </TestimonialsProvider>

@@ -157,8 +157,10 @@ function Header() {
       </Navbar.Brand>
       <div className="flex md:order-2">
         <Button
-          as={Link}
-          to="/programs"
+          as="a"
+          href="https://thefutureofwork.ph"
+          target="_blank"
+          rel="noopener noreferrer"
           className="hidden lg:block"
           pill
           color="failure"
@@ -169,7 +171,7 @@ function Header() {
             },
           }}
         >
-          LEARN MORE
+          The Future of Work
         </Button>
         <Navbar.Toggle />
       </div>
@@ -332,7 +334,7 @@ function FooterPrograms() {
   const [programs, setPrograms] = useState(null);
   const { retrievePrograms } = usePrograms();
   let host = "http://localhost:5173/programs";
-  host = "https://new.inspireleaders.com.ph/";
+  // host = "https://new.inspireleaders.com.ph/";
   useEffect(() => {
     const setup = async () => {
       const response = await retrievePrograms();

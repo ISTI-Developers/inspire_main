@@ -24,16 +24,16 @@ import { format } from "date-fns";
 
 export default function ContactUs() {
   const { insertInquiry } = useSubscription();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [inquiry, setInquiry] = useState(defaults.inquiry);
-  console.log(inquiry)
+  console.log(inquiry);
   const [step, setStep] = useState(0);
   const onSubmit = async (e) => {
     e.preventDefault();
     inquiry.event_date = format(inquiry.event_date, "yyyy-MM-dd");
     const response = await insertInquiry(inquiry);
     alert(response);
-    navigate("/")
+    navigate("/");
   };
   return (
     <div className="py-4 bg-gray-50 min-h-screen">
@@ -186,7 +186,7 @@ function Inquirer({ inquiry, setInquiry }) {
                   className="w-full"
                   onChange={handleChange}
                   value={inquiry[field.key]}
-                // onInput={(e) => console.log(e.target.value)}
+                  // onInput={(e) => console.log(e.target.value)}
                 />
               ) : (
                 <TextInput
@@ -367,7 +367,7 @@ function Event({ inquiry, setInquiry }) {
                         value={inquiry[field.key]}
                         placeholder={field.placeholder || ""}
                         required={field.isRequired}
-                      // onInput={(e) => console.log(e.target.value)}
+                        // onInput={(e) => console.log(e.target.value)}
                       />
                     ) : field.type === "select" ? (
                       <Select

@@ -6,7 +6,7 @@ const Banners = () => {
   const [images, setImages] = useState([]);
   const [currentImage, setCurrentImage] = useState(0);
   let host = "http://localhost/inspiredb";
-  host = "https://new.inspireleaders.com.ph/api";
+  // host = "https://new.inspireleaders.com.ph/api";
 
   useEffect(() => {
     const interval = setInterval(() => {

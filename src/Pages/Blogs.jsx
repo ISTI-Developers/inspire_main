@@ -25,7 +25,7 @@ const BlogCard = ({ img, title, description, link }) => {
 
 export default function Blogs() {
   let host = "http://localhost/inspiredb";
-  host = "https://new.inspireleaders.com.ph/api";
+  // host = "https://new.inspireleaders.com.ph/api";
   const { retrieveBlogs } = useBlogs();
   const [blogs, setBlogs] = useState(null);
   useEffect(() => {

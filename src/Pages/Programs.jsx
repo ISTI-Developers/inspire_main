@@ -3,7 +3,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import Program from "./Program";
 import { useEffect, useState } from "react";
 import usePrograms from "../Context/ProgramsContext";
-import { RegistrationProvider } from "../Context/RegistraionContext";
+import { RegistrationProvider } from "../Context/RegistrationContext";
 import Registration from "../Components/ContactUsPage/Registration";
 import ILCI from "../assets/BrPrograms/ILCI.mp4";
 
@@ -13,13 +13,13 @@ export default function Programs() {
     `INSPIRE'S SIGNATURE SALES PROGRAMS`,
   ];
   let host = "http://localhost/inspiredb";
-  host = "https://new.inspireleaders.com.ph/api";
+  // host = "https://new.inspireleaders.com.ph/api";
   const [programs, setPrograms] = useState(null);
   const { retrievePrograms } = usePrograms();
   useEffect(() => {
     const setup = async () => {
       const response = await retrievePrograms();
-      console.log(response);
+      // console.log(response);
       setPrograms(response);
     };
     setup();

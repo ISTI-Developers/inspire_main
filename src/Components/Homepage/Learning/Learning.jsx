@@ -8,7 +8,7 @@ const Learning = () => {
   const { retrievePartners } = usePartner();
   const [partners, setPartners] = useState(null);
   let host = "http://localhost:5173/programs";
-  host = "https://new.inspireleaders.com.ph/api";
+  // host = "https://new.inspireleaders.com.ph/api";
 
   useEffect(() => {
     const setup = async () => {
