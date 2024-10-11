@@ -176,9 +176,10 @@ function Header() {
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
-        {links.map((a) => {
+        {links.map((a, index) => {
           return (
             <Navbar.Link
+              key={index}
               as={Link}
               to={`/${a.link}`}
               active={track.pathname === `/${a.link}`}
@@ -244,10 +245,10 @@ function Footer() {
           <section className="flex flex-col gap-2">
             <Label className="text-white text-base" value="CONTACT US:" />
             <ul className="flex flex-col gap-2">
-              {socials.map((link) => {
+              {socials.map((link, index) => {
                 const Icon = link.icon;
                 return (
-                  <li>
+                  <li key={index}>
                     <a
                       target="_blank"
                       href={link.link}
@@ -334,7 +335,7 @@ function FooterPrograms() {
   const [programs, setPrograms] = useState(null);
   const { retrievePrograms } = usePrograms();
   let host = "http://localhost:5173/programs";
-  // host = "https://new.inspireleaders.com.ph/";
+  host = "https://new.inspireleaders.com.ph/";
   useEffect(() => {
     const setup = async () => {
       const response = await retrievePrograms();

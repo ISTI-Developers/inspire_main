@@ -106,6 +106,7 @@ function Testimonial() {
             {cards.map((card, index) => {
               return (
                 <Card
+                  key={index}
                   msg={card.recommendation}
                   name={card.name}
                   pos={`${card.company} - ${card.position}`}

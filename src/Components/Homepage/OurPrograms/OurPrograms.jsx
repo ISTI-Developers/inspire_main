@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import usePrograms from "../../../Context/ProgramsContext";
 function OurPrograms() {
   let host = "http://localhost/inspiredb";
-  // host = "https://new.inspireleaders.com.ph/api";
+  host = "https://new.inspireleaders.com.ph/api";
   const { retrievePrograms } = usePrograms();
   const [programs, setPrograms] = useState(null);
 
@@ -28,7 +28,7 @@ function OurPrograms() {
               const length = program.overview.length;
               return (
                 <div
-                  key={program.id}
+                  key={program.program_id}
                   className="group relative shadow-xl rounded-xl overflow-hidden w-full max-w-[450px] transition-all lg:max-w-[600px] hover:z-[3] hover:-translate-y-2 hover:scale-110"
                 >
                   <img src={`${host}${program.image}`} />

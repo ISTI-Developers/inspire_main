@@ -8,7 +8,7 @@ import useExperts from "../Context/ExpertsContext";
 function Experts() {
   const { retrieveExperts } = useExperts();
   let host = "http://localhost/inspiredb";
-  // host = "https://new.inspireleaders.com.ph/api";
+  host = "https://new.inspireleaders.com.ph/api";
   const [experts, setExperts] = useState(null);
   useEffect(() => {
     const setup = async () => {

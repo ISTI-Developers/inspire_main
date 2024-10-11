@@ -3,7 +3,7 @@ import useClient from "../../../Context/ClientContext";
 
 const Clients = () => {
   let host = "http://localhost/inspiredb";
-  // host = "https://new.inspireleaders.com.ph/api";
+  host = "https://new.inspireleaders.com.ph/api";
   const containerRef = useRef(null);
   const [currentPage, setCurrentPage] = useState(0);
 

@@ -21,7 +21,7 @@ function CountdownItem({ value, label }) {
 }
 function Program() {
   let host = "http://localhost/inspiredb";
-  // host = "https://new.inspireleaders.com.ph/api";
+  host = "https://new.inspireleaders.com.ph/api";
   const { id } = useParams();
   const [program, setProgram] = useState(null);
   const { retrieveProgram } = usePrograms();
