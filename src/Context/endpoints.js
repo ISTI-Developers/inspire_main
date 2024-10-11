@@ -1,5 +1,5 @@
 let host = "http://localhost/inspiredb";
-// host = "https://new.inspireleaders.com.ph/api";
+host = "https://new.inspireleaders.com.ph/api";
 
 export const endpoints = {
     newsletter: host + "/newsletter.php",

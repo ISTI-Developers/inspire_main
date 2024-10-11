@@ -13,7 +13,7 @@ export default function Programs() {
     `INSPIRE'S SIGNATURE SALES PROGRAMS`,
   ];
   let host = "http://localhost/inspiredb";
-  // host = "https://new.inspireleaders.com.ph/api";
+  host = "https://new.inspireleaders.com.ph/api";
   const [programs, setPrograms] = useState(null);
   const { retrievePrograms } = usePrograms();
   useEffect(() => {

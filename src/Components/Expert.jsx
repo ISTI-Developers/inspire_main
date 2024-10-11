@@ -9,7 +9,7 @@ function Expert() {
   const { id } = useParams();
   console.log(id);
   let host = "http://localhost/inspiredb";
-  // host = "https://new.inspireleaders.com.ph/api";
+  host = "https://new.inspireleaders.com.ph/api";
   const { retrieveExperts } = useExperts();
   const [experts, setExperts] = useState([]);
   const [expert, setExpert] = useState();

@@ -5,7 +5,7 @@ import { format } from "date-fns";
 
 function Blog() {
   let host = "http://localhost/inspiredb";
-  // host = "https://new.inspireleaders.com.ph/api";
+  host = "https://new.inspireleaders.com.ph/api";
   const { id } = useParams();
   const { retrieveBlog } = useBlogs();
   const [blog, setBlog] = useState(null);
