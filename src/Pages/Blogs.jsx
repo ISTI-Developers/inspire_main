@@ -80,13 +80,27 @@ export default function Blogs() {
                 </div>
                 <div className="flex gap-6 flex-wrap">
                   {blogs.map((blog) => {
-                    console.log(blog);
+                    // Get the first part of the description
+                    const htmlContent = JSON.parse(blog.file_path);
+                    const tempDiv = document.createElement("div");
+                    tempDiv.innerHTML = htmlContent;
+                    const firstParagraph = tempDiv.querySelector("p");
+                    const limitedText = firstParagraph
+                      ? (() => {
+                          const words = firstParagraph.textContent.split(/\s+/);
+                          return (
+                            words.slice(0, 20).join(" ") +
+                            (words.length > 20 ? "..." : "")
+                          );
+                        })()
+                      : "No description available.";
+                    // End
                     return (
                       <BlogCard
                         key={blog.blog_id}
                         img={`${host}${blog.image}`}
                         title={blog.title}
-                        description="As a leader, you possess the role and power to maintain the well-being of your subordinates. By learning about the signs of exhaustion, it will be easier for you to spot them and find ways on how to avoid the burnout that leads to the total destruction of the employee."
+                        description={limitedText}
                         link={blog.blog_id}
                       />
                     );

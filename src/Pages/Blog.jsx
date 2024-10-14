@@ -11,11 +11,11 @@ function Blog() {
   useEffect(() => {
     const setup = async () => {
       const results = await retrieveBlog(id);
-      console.log(results);
       setBlog(results);
     };
     setup();
   }, [id]);
+
   return (
     blog && (
       <div className="flex flex-col justify-center items-center">
