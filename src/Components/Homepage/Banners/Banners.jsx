@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import useBanner from "../../../Context/BannersContext";
+import host from "../../../Context/endpoints";
 
 const Banners = () => {
   const { retrieveBanners } = useBanner();
   const [images, setImages] = useState([]);
   const [currentImage, setCurrentImage] = useState(0);
-  let host = "http://localhost/inspiredb";
-  host = "https://new.inspireleaders.com.ph/api";
 
   useEffect(() => {
     const interval = setInterval(() => {

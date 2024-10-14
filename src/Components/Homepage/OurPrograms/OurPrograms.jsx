@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import usePrograms from "../../../Context/ProgramsContext";
+import host from "../../../Context/endpoints";
+
 function OurPrograms() {
-  let host = "http://localhost/inspiredb";
-  host = "https://new.inspireleaders.com.ph/api";
   const { retrievePrograms } = usePrograms();
   const [programs, setPrograms] = useState(null);
 

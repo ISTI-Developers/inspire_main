@@ -3,6 +3,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useBlogs from "../Context/BlogsContext";
 import Blog from "./Blog";
+import host from "../Context/endpoints";
 
 const BlogCard = ({ img, title, description, link }) => {
   return (
@@ -24,8 +25,6 @@ const BlogCard = ({ img, title, description, link }) => {
 };
 
 export default function Blogs() {
-  let host = "http://localhost/inspiredb";
-  host = "https://new.inspireleaders.com.ph/api";
   const { retrieveBlogs } = useBlogs();
   const [blogs, setBlogs] = useState(null);
   useEffect(() => {

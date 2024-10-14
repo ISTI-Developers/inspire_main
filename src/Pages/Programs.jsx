@@ -6,14 +6,14 @@ import usePrograms from "../Context/ProgramsContext";
 import { RegistrationProvider } from "../Context/RegistrationContext";
 import Registration from "../Components/ContactUsPage/Registration";
 import ILCI from "../assets/BrPrograms/ILCI.mp4";
+import host from "../Context/endpoints";
 
 export default function Programs() {
   const categories = [
     `INSPIRE'S LEADERSHIP SIGNATURE PROGRAMS`,
     `INSPIRE'S SIGNATURE SALES PROGRAMS`,
   ];
-  let host = "http://localhost/inspiredb";
-  host = "https://new.inspireleaders.com.ph/api";
+
   const [programs, setPrograms] = useState(null);
   const { retrievePrograms } = usePrograms();
   useEffect(() => {

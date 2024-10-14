@@ -10,6 +10,7 @@ import {
   format,
 } from "date-fns";
 import { Banner } from "flowbite-react";
+import host from "../Context/endpoints";
 
 function CountdownItem({ value, label }) {
   return (
@@ -20,8 +21,6 @@ function CountdownItem({ value, label }) {
   );
 }
 function Program() {
-  let host = "http://localhost/inspiredb";
-  host = "https://new.inspireleaders.com.ph/api";
   const { id } = useParams();
   const [program, setProgram] = useState(null);
   const { retrieveProgram } = usePrograms();
