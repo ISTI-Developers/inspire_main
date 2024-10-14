@@ -94,15 +94,15 @@ export default function Programs() {
                                   by {prog.facilitator}
                                 </h6>
                               </div>
-                              <a
-                                href={`/programs/${prog.program_id}`}
-                                className="flex justify-center items-center mt-10 text-base text-black border-solid border-black max-md:mt-10"
+                              <Link
+                                to={`/programs/${prog.program_id}`}
+                                className="flex items-center gap-2 mt-auto hover:underline transition-all hover:text-[#DF0000]"
                               >
-                                <span className="mr-2 hover:underline">
+                                <span className="grow xl:text-xl">
                                   Read more
                                 </span>
-                                <FaArrowRight className="w-4 h-4" />
-                              </a>
+                                <FaArrowRight className="w-4 h-4 ml-1" />
+                              </Link>
                             </div>
                           );
                         })}

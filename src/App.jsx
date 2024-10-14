@@ -38,8 +38,19 @@ import "leaflet-defaulticon-compatibility";
 import { useEffect, useState } from "react";
 
 function App() {
+  const ScrollToTop = () => {
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [pathname]);
+
+    return null;
+  };
+
   return (
     <Rout>
+      <ScrollToTop />
       <Header />
       <div className="min-h-[calc(100vh-85px)]">
         <Routes>
@@ -171,7 +182,7 @@ function Header() {
             },
           }}
         >
-          The Future of Work
+          THE FUTURE OF WORK
         </Button>
         <Navbar.Toggle />
       </div>

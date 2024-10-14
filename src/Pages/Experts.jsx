@@ -42,7 +42,7 @@ function Experts() {
                       >
                         <img
                           src={`${host}${images[0]}`}
-                          className="w-full max-w-[12rem] rounded-lg"
+                          className="rounded-lg max-w-full border-gray-200 border-solid aspect-square w-[12rem]"
                           alt={expert.name}
                         />
                         <p className="text-2xl xl:text-3xl font-bold text-center">
