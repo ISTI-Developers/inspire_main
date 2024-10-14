@@ -345,8 +345,8 @@ function Registration() {
                           }}
                         />
                         <a
-                          href="/src/assets/6mos-WebDevs-KPI.xlsx"
-                          download="6mos-WebDevs-KPI.xlsx"
+                          href="/src/assets/Participant-Template.xlsx"
+                          download="Participant-Template.xlsx"
                           className="text-blue-500 underline"
                         >
                           Click here for the template
