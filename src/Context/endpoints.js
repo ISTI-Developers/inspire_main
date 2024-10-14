@@ -1,8 +1,7 @@
 const host =
-  // import.meta.env.MODE === "development"
-  //   ? "http://localhost/inspiredb"
-  //   : 
-    "https://new.inspireleaders.com.ph/api";
+  import.meta.env.MODE === "development"
+    ? "http://localhost/inspiredb"
+    : "https://new.inspireleaders.com.ph/api";
 export default host;
 
 export const endpoints = {
