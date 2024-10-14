@@ -11,7 +11,6 @@ function Blog() {
   useEffect(() => {
     const setup = async () => {
       const results = await retrieveBlog(id);
-      console.log(results);
       setBlog(results);
     };
     setup();
@@ -22,7 +21,7 @@ function Blog() {
         <div className="max-w-full overflow-hidden flex flex-col gap-2">
           <img
             src={`${host}${blog.image}`}
-            alt=""
+            alt={blog.title || "Blog image"}
             className="self-stretch w-full aspect-[2.33] max-md:max-w-full"
           />
           <h3 className="text-2xl font-bold text-[#DF0000]">{blog.title}</h3>

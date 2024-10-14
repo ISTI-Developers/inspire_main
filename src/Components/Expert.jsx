@@ -9,7 +9,7 @@ import host from "../Context/endpoints";
 function Expert() {
   const { id } = useParams();
   const { retrieveExperts } = useExperts();
-  const [experts, setExperts] = useState([]);
+  const [randomExperts, setRandomExperts] = useState([]);
   const [expert, setExpert] = useState();
   useEffect(() => {
     const setup = async () => {
@@ -20,8 +20,13 @@ function Expert() {
           images: JSON.parse(result.images),
         };
       });
-      setExperts(results.filter((exp) => exp.name !== id));
       setExpert(results.find((exp) => exp.name === id));
+
+      // Random 4 experts
+      const filteredExperts = results.filter((exp) => exp.name !== id);
+      const shuffled = filteredExperts.sort(() => 0.5 - Math.random());
+      const selectedExperts = shuffled.slice(0, 4);
+      setRandomExperts(selectedExperts);
     };
     setup();
   }, [id]);
@@ -56,65 +61,34 @@ function Expert() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-4 pb-4">
+        <div className="flex flex-col gap-4">
           <div className="flex font-bold text-lg ml-4">VIEW OTHER EXPERTS</div>
-          <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
-            <Carousel
-              slide={false}
-              theme={{
-                indicators: {
-                  active: {
-                    off: "bg-gray-300 hover:bg-gray-200 dark:bg-gray-800/50 dark:hover:bg-gray-800",
-                    on: "bg-gray-600 dark:bg-gray-400",
-                  },
-                  base: "h-3 w-3 rounded-full",
-                  wrapper:
-                    "absolute -bottom-7 left-1/2 flex -translate-x-1/2 space-x-3 lg:hidden",
-                },
-              }}
-            >
-              {experts.map((exp, index) => (
-                <div
-                  key={index}
-                  className="flex h-full items-center justify-center dark:text-white"
-                >
-                  <div className="px-3 py-10 mx-auto w-full border grid md:grid-cols-2 lg:grid-cols-4 place-content-center gap-4">
-                    {experts
-                      .slice(index * 4, (index + 1) * 4)
-                      .map((exp, idx) => {
-                        return (
-                          <div
-                            key={idx}
-                            className="flex shadow-sm hover:shadow-2xl dark-shadow transition-all rounded-lg"
-                          >
-                            <div className="flex flex-col items-center px-5 py-8 gap-4  text-black bg-white ">
-                              {/* Use image from newImages array */}
-                              <img
-                                src={`${host}${exp.images[0]}`}
-                                alt=""
-                                className="max-w-full border-gray-200 border-solid aspect-square w-[120px]"
-                              />
-                              <div className="text-xl font-bold text-center whitespace-nowrap">
-                                {exp.name}
-                              </div>
-                              <div className="self-stretch mt-2 text-sm leading-5 text-center">
-                                {exp.description}
-                              </div>
-                              <Link
-                                to={`/Experts/${exp.name}`}
-                                className="flex items-center mt-auto"
-                              >
-                                <span className="grow">Read more</span>
-                                <FaArrowRight className="w-4 h-4 ml-1" />
-                              </Link>
-                            </div>
-                          </div>
-                        );
-                      })}
-                  </div>
+          <div className="w-full max-md:max-w-full border grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 place-content-center justify-evenly gap-4 md:gap-5 xl:gap-10 p-5 md:px-12">
+            {randomExperts.slice(0, 4).map((exp, index) => (
+              <div
+                key={index}
+                className="flex flex-col items-center gap-4 w-full border min-h-[30rem] p-5 shadow-md hover:shadow-2xl transition-all rounded-3xl"
+              >
+                <img
+                  src={`${host}${exp.images[0]}`}
+                  alt={exp.name}
+                  className="max-w-full border-gray-200 border-solid aspect-square w-[120px]"
+                />
+                <div className="text-xl xl:text-2xl font-bold text-center">
+                  {exp.name}
                 </div>
-              ))}
-            </Carousel>
+                <div className="mt-4 text-sm leading-6 indent-4 text-justify whitespace-break-spaces flex-grow">
+                  {exp.description}
+                </div>
+                <Link
+                  to={`/Experts/${exp.name}`}
+                  className="flex items-center gap-2 mt-auto hover:underline transition-all hover:text-[#DF0000]"
+                >
+                  <span className="grow xl:text-xl">Read more</span>
+                  <FaArrowRight className="w-4 h-4 ml-1" />
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
       </div>
