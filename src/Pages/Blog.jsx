@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import useBlogs from "../Context/BlogsContext";
 import { useParams } from "react-router-dom";
 import { format } from "date-fns";
+import host from "../Context/endpoints";
 
 function Blog() {
-  let host = "http://localhost/inspiredb";
-  host = "https://new.inspireleaders.com.ph/api";
   const { id } = useParams();
   const { retrieveBlog } = useBlogs();
   const [blog, setBlog] = useState(null);

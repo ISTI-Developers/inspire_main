@@ -1,14 +1,10 @@
-import UNlogo from "../../../assets/Learning/UNlogo.png";
-import PLI from "../../../assets/Learning/PLI.webp";
-import ideas from "../../../assets/Learning/ideas.png";
 import { useEffect, useState } from "react";
 import usePartner from "../../../Context/PartnersContext";
+import host from "../../../Context/endpoints";
 
 const Learning = () => {
   const { retrievePartners } = usePartner();
   const [partners, setPartners] = useState(null);
-  let host = "http://localhost:5173/programs";
-  host = "https://new.inspireleaders.com.ph/api";
 
   useEffect(() => {
     const setup = async () => {
@@ -26,7 +22,11 @@ const Learning = () => {
         <div className="flex gap-4 w-full justify-center">
           {partners.map((partner) => {
             return (
-              <img key={partner.partners_id} src={`${host}${partner.images}`} className="max-h-[35px] md:max-h-[50px] xl:max-h-[60px] w-fit object-contain" />
+              <img
+                key={partner.partners_id}
+                src={`${host}${partner.images}`}
+                className="max-h-[35px] md:max-h-[50px] xl:max-h-[60px] w-fit object-contain"
+              />
             );
           })}
         </div>

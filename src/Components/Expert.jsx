@@ -4,12 +4,10 @@ import { IoArrowBackCircle } from "react-icons/io5";
 import { Carousel } from "flowbite-react";
 import { FaArrowRight } from "react-icons/fa";
 import useExperts from "../Context/ExpertsContext";
+import host from "../Context/endpoints";
 
 function Expert() {
   const { id } = useParams();
-  console.log(id);
-  let host = "http://localhost/inspiredb";
-  host = "https://new.inspireleaders.com.ph/api";
   const { retrieveExperts } = useExperts();
   const [experts, setExperts] = useState([]);
   const [expert, setExpert] = useState();

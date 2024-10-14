@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import usePrograms from "../../../Context/ProgramsContext";
+import host from "../../../Context/endpoints";
+
 function UpcomingPrograms() {
-  let host = "http://localhost/inspiredb";
-  host = "https://new.inspireleaders.com.ph/api";
   const { retrievePrograms } = usePrograms();
   const [programs, setPrograms] = useState(null);
 
@@ -46,14 +46,18 @@ function UpcomingPrograms() {
               key={programs.id}
               className="group relative shadow-xl rounded-xl overflow-hidden w-full max-w-[450px] transition-all lg:max-w-[600px] hover:z-[3] hover:-translate-y-2 hover:scale-110"
             >
-              <img src={`${host}${programs.image}`} />
+              <img
+                src={`${host}${programs.image}`}
+                alt={programs.title}
+                className="w-full h-auto object-cover"
+              />
               <div className="min-h-[120px] p-4 bg-white w-full">
                 <h5 className="text-sm xl:text-lg font-bold tracking-tight text-gray-900 dark:text-white">
                   {programs.title}
                   <p className="font-normal text-base">
                     by {programs.facilitator}
                   </p>
-                  <h6>
+                  <p>
                     {new Date(programs.program_date).toLocaleDateString(
                       "en-US",
                       {
@@ -62,7 +66,7 @@ function UpcomingPrograms() {
                         day: "numeric",
                       }
                     )}
-                  </h6>
+                  </p>
                 </h5>
                 <Link
                   to={`/programs/${programs.program_id}`}

@@ -1,44 +1,27 @@
 import React, { useEffect, useState, useRef } from "react";
 import useRegistration from "../../Context/RegistrationContext";
-import {
-  Button,
-  Checkbox,
-  Label,
-  Radio,
-  TextInput,
-  FileInput,
-} from "flowbite-react";
+import { Button, Checkbox, Label, TextInput, FileInput } from "flowbite-react";
 import { useParams } from "react-router-dom";
 import usePrograms from "../../Context/ProgramsContext";
+import {
+  initialFormState,
+  registrationTypes,
+  textInputs,
+  findOut,
+  capitalize,
+} from "./ContactUsPage.const";
 
 function Registration() {
   const { id } = useParams();
-  const [program, setProgram] = useState(null);
   const { retrieveProgram } = usePrograms();
   const { insertRegistration } = useRegistration();
+  const [program, setProgram] = useState(null);
   const [moreThanTen, setMoreThanTen] = useState(false);
   const [numberOfParticipants, setNumberOfParticipants] = useState(undefined);
-  const fileInputRefMoreThanTen = useRef(null);
-  const fileInputRefProof = useRef(null);
-
-  const initialFormState = {
-    registration_type: "",
-    first_name: "",
-    last_name: "",
-    email_address: "",
-    mobile_number: "",
-    ref_name: "",
-    proof: null,
-    tin_num: "",
-    program_id: "",
-    source_platform: "",
-    company_name: "",
-    position: "",
-    more_than_ten: "",
-    participants: [],
-  };
   const [user, setUser] = useState(initialFormState);
   const [submitting, setSubmitting] = useState(false);
+  const fileInputRefMoreThanTen = useRef(null);
+  const fileInputRefProof = useRef(null);
 
   const registration = async (e) => {
     e.preventDefault();
@@ -56,7 +39,7 @@ function Registration() {
       requiredFields.push(user.company_name, user.position);
     }
     if (user.registration_type === "Company (Group)") {
-      if (!moreThanTen) {
+      if (!moreThanTen && user.participants < 2) {
         alert("Please add at least one participant.");
         return;
       }
@@ -147,17 +130,6 @@ function Registration() {
     }
   };
 
-  const capitalize = (string) => {
-    let temp = string.split("_");
-
-    temp = temp.map((t) => {
-      t = t.toLowerCase();
-      return t.substring(0, 1).toUpperCase() + t.slice(1);
-    });
-
-    return temp.join(" ");
-  };
-
   useEffect(() => {
     const setup = async () => {
       const result = await retrieveProgram(id);
@@ -165,20 +137,6 @@ function Registration() {
     };
     setup();
   }, []);
-
-  const registrationTypes = [
-    "Personal",
-    "Company (Individual)",
-    "Company (Group)",
-  ];
-
-  const textInputs = [
-    "first_name",
-    "last_name",
-    "email_address",
-    "mobile_number",
-  ];
-  const findOut = ["Facebook", "LinkedIn", "Email"];
 
   const dynamicInputs =
     user.registration_type === "Company (Individual)" ||
@@ -211,6 +169,12 @@ function Registration() {
       }));
       setNumberOfParticipants(undefined);
       setMoreThanTen(false);
+      if (fileInputRefProof.current) {
+        fileInputRefProof.current.value = "";
+      }
+      if (fileInputRefMoreThanTen.current) {
+        fileInputRefMoreThanTen.current.value = "";
+      }
     }
   };
   const handleParticipantsChange = (e) => {

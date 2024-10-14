@@ -4,11 +4,10 @@ import Expert from "../Components/Expert";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useExperts from "../Context/ExpertsContext";
+import host from "../Context/endpoints";
 
 function Experts() {
   const { retrieveExperts } = useExperts();
-  let host = "http://localhost/inspiredb";
-  host = "https://new.inspireleaders.com.ph/api";
   const [experts, setExperts] = useState(null);
   useEffect(() => {
     const setup = async () => {
