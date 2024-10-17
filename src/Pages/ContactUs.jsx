@@ -21,13 +21,14 @@ import {
 } from "react-icons/fa";
 import classNames from "classnames";
 import { format } from "date-fns";
-
+import { fields } from "./ContactUs.const.js";
 export default function ContactUs() {
   const { insertInquiry } = useSubscription();
   const navigate = useNavigate();
   const [inquiry, setInquiry] = useState(defaults.inquiry);
-  console.log(inquiry);
   const [step, setStep] = useState(0);
+  const [errors, setErrors] = useState({});
+
   const onSubmit = async (e) => {
     e.preventDefault();
     inquiry.event_date = format(inquiry.event_date, "yyyy-MM-dd");
@@ -35,6 +36,24 @@ export default function ContactUs() {
     alert(response);
     navigate("/");
   };
+
+  const validateFields = () => {
+    const newErrors = {};
+    fields.forEach((field) => {
+      if (field.isRequired && !inquiry[field.key]) {
+        newErrors[field.key] = `${field.label} is required`;
+      }
+    });
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleNextClick = () => {
+    if (validateFields()) {
+      setStep((previous) => previous + 1);
+    }
+  };
+
   return (
     <div className="py-4 bg-gray-50 min-h-screen">
       <div
@@ -64,7 +83,11 @@ export default function ContactUs() {
           )}
         >
           {step === 0 ? (
-            <Inquirer setInquiry={setInquiry} inquiry={inquiry} />
+            <Inquirer
+              setInquiry={setInquiry}
+              inquiry={inquiry}
+              errors={errors}
+            />
           ) : (
             <Event setInquiry={setInquiry} inquiry={inquiry} />
           )}
@@ -73,11 +96,7 @@ export default function ContactUs() {
               <button
                 type="button"
                 className="flex gap-1 rounded-md hover:underline"
-                onClick={() =>
-                  setStep((previous) => {
-                    return (previous = previous - 1);
-                  })
-                }
+                onClick={() => setStep((previous) => previous - 1)}
               >
                 <FaArrowCircleLeft className="w-6 h-6 text-black" />
                 Back
@@ -87,11 +106,7 @@ export default function ContactUs() {
               <button
                 type="button"
                 className="flex gap-1 rounded-md hover:underline ml-auto"
-                onClick={() =>
-                  setStep((previous) => {
-                    return (previous = previous + 1);
-                  })
-                }
+                onClick={handleNextClick}
               >
                 Next
                 <FaArrowCircleRight className="w-6 h-6 text-black" />
@@ -120,44 +135,12 @@ export default function ContactUs() {
   );
 }
 
-function Inquirer({ inquiry, setInquiry }) {
-  const fields = [
-    {
-      key: "company_name",
-      type: "text",
-      label: "Company/Organization",
-      isRequired: true,
-    },
-    {
-      key: "company_information",
-      type: "textarea",
-      label: "We'd like to know more about your organization",
-      isRequired: true,
-    },
-    { key: "name", type: "text", label: "Name", isRequired: true },
-    {
-      key: "designation",
-      type: "text",
-      label: "Designation",
-      isRequired: true,
-    },
-    { key: "email", type: "email", label: "Email", isRequired: true },
-    {
-      key: "contact_number",
-      type: "tel",
-      label: "Contact Number",
-      isRequired: true,
-      placeholder: "i.e 09987654321",
-    },
-  ];
-
+function Inquirer({ inquiry, setInquiry, errors }) {
   const handleChange = (e) => {
-    setInquiry((prev) => {
-      return {
-        ...prev,
-        [e.target.id]: e.target.value,
-      };
-    });
+    setInquiry((prev) => ({
+      ...prev,
+      [e.target.id]: e.target.value,
+    }));
   };
 
   return (
@@ -166,45 +149,44 @@ function Inquirer({ inquiry, setInquiry }) {
         We&apos;d like to know more about you.
       </h3>
       <div className="flex flex-col gap-2 w-full">
-        {fields.map((field, index) => {
-          return (
-            <div key={field.key} className="flex flex-col py-2 gap-2">
-              <Label
-                htmlFor={field.key}
-                value={
-                  <>
-                    {field.label}
-                    {field.isRequired && (
-                      <span className="text-red-400">*</span>
-                    )}
-                  </>
-                }
+        {fields.map((field, index) => (
+          <div key={field.key} className="flex flex-col py-2 gap-2">
+            <Label
+              htmlFor={field.key}
+              value={
+                <>
+                  {field.label}
+                  {field.isRequired && <span className="text-red-400">*</span>}
+                </>
+              }
+            />
+            {field.type === "textarea" ? (
+              <Textarea
+                id={field.key}
+                className="w-full"
+                onChange={handleChange}
+                value={inquiry[field.key]}
+                // onInput={(e) => console.log(e.target.value)}
               />
-              {field.type === "textarea" ? (
-                <Textarea
-                  id={field.key}
-                  className="w-full"
-                  onChange={handleChange}
-                  value={inquiry[field.key]}
-                  // onInput={(e) => console.log(e.target.value)}
-                />
-              ) : (
-                <TextInput
-                  id={field.key}
-                  type={field.type}
-                  className="w-full"
-                  pattern={
-                    field.type === "tel" ? "[0-9]{3}[0-9]{3}[0-9]{4}" : null
-                  }
-                  required={field.isRequired}
-                  onChange={handleChange}
-                  value={inquiry[field.key]}
-                  placeholder={field.placeholder || ""}
-                />
-              )}
-            </div>
-          );
-        })}
+            ) : (
+              <TextInput
+                id={field.key}
+                type={field.type}
+                className="w-full"
+                pattern={
+                  field.type === "tel" ? "[0-9]{3}[0-9]{3}[0-9]{4}" : null
+                }
+                required={field.isRequired}
+                onChange={handleChange}
+                value={inquiry[field.key]}
+                placeholder={field.placeholder || ""}
+              />
+            )}
+            {errors[field.key] && (
+              <p className="text-red-500 text-sm">{errors[field.key]}</p>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );

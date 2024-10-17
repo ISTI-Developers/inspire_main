@@ -159,7 +159,7 @@ function Header() {
         },
       }}
     >
-      <Navbar.Brand as={Link} to={`https://new.inspireleaders.com.ph`}>
+      <Navbar.Brand as={Link} to={`https://inspireleaders.com.ph`}>
         <img
           src={inspirelogo}
           className="h-[53px] lg:h-[70px]"
@@ -346,7 +346,7 @@ function FooterPrograms() {
   const [programs, setPrograms] = useState(null);
   const { retrievePrograms } = usePrograms();
   let host = "http://localhost:5173/programs";
-  host = "https://new.inspireleaders.com.ph/";
+  host = "https://inspireleaders.com.ph/";
   useEffect(() => {
     const setup = async () => {
       const response = await retrievePrograms();
