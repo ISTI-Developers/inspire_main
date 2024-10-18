@@ -15,7 +15,6 @@ import Calendar from "./Components/Calendar/Calendar";
 import Experts from "./Pages/Experts";
 import Blogs from "./Pages/Blogs";
 import ContactUs from "./Pages/ContactUs";
-import map from "./assets/map.png";
 import unmg from "./assets/unmg.png";
 import {
   FaEnvelope,
@@ -26,7 +25,6 @@ import {
   FaInstagram,
   FaDotCircle,
 } from "react-icons/fa";
-import { AiFillInstagram } from "react-icons/ai";
 import { SubscriptionProvider } from "./Context/SubscriptionContext";
 import { ExpertsProvider } from "./Context/ExpertsContext";
 import usePrograms, { ProgramProvider } from "./Context/ProgramsContext";
@@ -36,7 +34,7 @@ import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet-defaulticon-compatibility";
 import { useEffect, useState } from "react";
-
+import DarkModeToggle from "./DarkModeToggle";
 function App() {
   const ScrollToTop = () => {
     const { pathname } = useLocation();
@@ -49,61 +47,64 @@ function App() {
   };
 
   return (
-    <Rout>
-      <ScrollToTop />
-      <Header />
-      <div className="min-h-[calc(100vh-85px)]">
-        <Routes>
-          <Route path="/*" element={<Home />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route
-            path="/programs/*"
-            element={
-              <ProgramProvider>
-                <Programs />
-              </ProgramProvider>
-            }
-          />
-          <Route
-            path="/calendar"
-            element={
-              <ProgramProvider>
-                <Calendar />
-              </ProgramProvider>
-            }
-          />
+    <>
+      <DarkModeToggle />
+      <Rout>
+        <ScrollToTop />
+        <Header />
+        <div className="min-h-[calc(100vh-85px)]">
+          <Routes>
+            <Route path="/*" element={<Home />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route
+              path="/programs/*"
+              element={
+                <ProgramProvider>
+                  <Programs />
+                </ProgramProvider>
+              }
+            />
+            <Route
+              path="/calendar"
+              element={
+                <ProgramProvider>
+                  <Calendar />
+                </ProgramProvider>
+              }
+            />
 
-          <Route
-            path="/experts/*"
-            element={
-              <ExpertsProvider>
-                <Experts />
-              </ExpertsProvider>
-            }
-          />
-          <Route
-            path="/blogs/*"
-            element={
-              <BlogsProvider>
-                <Blogs />
-              </BlogsProvider>
-            }
-          />
+            <Route
+              path="/experts/*"
+              element={
+                <ExpertsProvider>
+                  <Experts />
+                </ExpertsProvider>
+              }
+            />
+            <Route
+              path="/blogs/*"
+              element={
+                <BlogsProvider>
+                  <Blogs />
+                </BlogsProvider>
+              }
+            />
 
-          <Route
-            path="/contact-us"
-            element={
-              <SubscriptionProvider>
-                <ContactUs />
-              </SubscriptionProvider>
-            }
-          />
-        </Routes>
-      </div>
-      <ProgramProvider>
-        <Footer />
-      </ProgramProvider>
-    </Rout>
+            <Route
+              path="/contact-us"
+              element={
+                <SubscriptionProvider>
+                  <ContactUs />
+                </SubscriptionProvider>
+              }
+            />
+          </Routes>
+        </div>
+        <ProgramProvider>
+          <Footer />
+        </ProgramProvider>
+      </Rout>
+    </>
   );
 }
 
